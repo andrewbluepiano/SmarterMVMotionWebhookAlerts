@@ -11,8 +11,8 @@ if($output == 1){
     $email_subject = "Priority Motion Alert";
     $email_body = serialize($webhook);
     $to = "ara1494@rit.edu";
-    $headers = "From: '$visitor_email' \r\n";
-    $headers .= "Reply-To: $visitor_email \r\n";
+    $headers = "From: YOURSERVER@noreply.com \r\n";
+    $headers .= "Reply-To: YOURSERVER@noreply.com \r\n";
     mail($to,$email_subject,$email_body,$headers);
     error_log(serialize($webhook), 0);
 }
