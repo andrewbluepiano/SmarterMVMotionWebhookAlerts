@@ -1,12 +1,11 @@
 # Author: Andrew Afonso
 # Github: https://github.com/andrewbluepiano/SmarterMVMotionWebhookAlerts
+# A program that returns 0 if Wifi or Bluetooth devices are detected on a Meraki network whose MAC addresses are listed in the config file, and 1 if not.
 import socket
 import os
 import json
 import ssl
 import sys
-#pprint used for debugging
-#import pprint
 
 class config:
     # Defines config information
@@ -16,7 +15,7 @@ class config:
         self.networkID = ""
         self.shard = ""
     
-    # Loads information from an existing config.json file.
+    # Loads information from config.json
     def loadConfig(self):
         configFile = open('config.json', 'r')
         tempConfig = json.load(configFile)
@@ -112,7 +111,6 @@ def main():
     for client in wifiClients:
         if notify == 1 and client["status"] != "Offline" and client["mac"] in appConfig.trusted:
             notify = 0
-    
     if notify == 1:
         for client in bluetoothClients:
             if client["mac"] in appConfig.trusted:
