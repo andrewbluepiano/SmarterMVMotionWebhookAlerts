@@ -78,9 +78,7 @@ def main():
     wifireq = makerequest( wifitar, host, appConfig.apikey, "timespan=1800")
 #    print(wifireq)
     wificlientsget = senderSocket.query( host, wifireq)
-    wificlients = wificlientsget.split("}]")[0] + "}]"
-    wificlients = "[{" + wificlients.split("[{")[1]
-    wificlients = wificlients.replace("\\", "")
+    wificlients =  ("[{" + (wificlientsget.split("}]")[0] + "}]").split("[{")[1]).replace("\\", "")
 #    print(wificlients)
 #    print(soup)
 #    print(wificlients)
