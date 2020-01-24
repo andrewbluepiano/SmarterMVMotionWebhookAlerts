@@ -1,5 +1,5 @@
 # Author: Andrew Afonso
-# Github:
+# Github: https://github.com/andrewbluepiano/SmarterMVMotionWebhookAlerts
 import socket
 import os
 import json
@@ -99,7 +99,6 @@ def getBTClients(config, socket):
     BTClientsArray = json.loads(BTClients)
     return BTClientsArray
     
-
 def main():
     appConfig = config()
     appConfig.loadConfig()
@@ -107,43 +106,22 @@ def main():
     BTSocket = mySocket(appConfig.shard)
     wifiClients = getWifiClients(appConfig, WifiSocket)
     bluetoothClients = getBTClients(appConfig, BTSocket)
-    
-    
-    # The main loop. Checks if the camera detects a person, if so, check if any trusted devices are on the network. If not, alert.
-#    wificlientsget = requests.get(
-#        'https://api.meraki.com/api/v0/networks/' + appConfig.networkID + '/clients',
-#        headers={'x-cisco-meraki-api-key': appConfig.apikey, 'Accept': 'application/json'},
-#        params={'timespan' : '1800'}
-#    )
-#    bluetoothclientsget = requests.get(
-#        'https://api.meraki.com/api/v0/networks/' + appConfig.networkID + '/bluetoothClients',
-#        headers={'x-cisco-meraki-api-key': appConfig.apikey, 'Accept': 'application/json'},
-#        params={'timespan' : '60'}
-#    )
-    
-    
-#    bluetoothClients = json.loads(bluetoothclientsget.text)
-    
-#                    print(wificlientsget.url)
-#                    print(wificlientsget.text)
-#                    pp.pprint(wifiClients)
-#                    pp.pprint(bluetoothClients)
-    
     notify = 1
     
+    # Runs through the list of current Wifi and Bluetooth clients, and checks if they are trusted devices
     for client in wifiClients:
-        if client["status"] != "Offline" and client["mac"] in appConfig.trusted:
+        if notify == 1 and client["status"] != "Offline" and client["mac"] in appConfig.trusted:
             notify = 0
-#
-#    for client in bluetoothClients:
-#        if client["mac"] in appConfig.trusted:
-#            notify = 0
     
-    # What happens if a warnable person is detected. Ideal place to start customizations.
     if notify == 1:
-        print("1")
+        for client in bluetoothClients:
+            if client["mac"] in appConfig.trusted:
+                notify = 0
+    
+    if notify == 1:
+        print("1") # Notifiable person
     else:
-        print("0")
+        print("0") # Trusted devices detected, all safe (Probabaly)
 
 if __name__ == "__main__":
     main()
