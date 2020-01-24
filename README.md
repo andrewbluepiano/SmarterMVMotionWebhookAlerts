@@ -1,11 +1,5 @@
 # SmarterMVMotionAlerts (Webhook version)
-A filtering system for Meraki MV camera motion alerts that uses the idea that you don't need alerts for motion if a trusted individual is in the same location where the motion was detected. 
-
-
-This is being built. Just posting so I can version control at this point. 
-
-
-This is a seperate program from an earlier proof of this concept I built as a simple python script. 
+A filtering system for Meraki MV camera motion alerts that uses the idea that you don't need alerts for motion if a trusted individual is in the same location where the motion was detected. By remembering a few network / bluetooth devices that you usually take with you when you leave the house, the program can check if you are likely home or not when it sees a 'person'. 
 
 
 ### Setup
