@@ -14,6 +14,7 @@ class config:
         self.trusted = []
         self.apikey = ""
         self.networkID = ""
+        self.shard = ""
     
     # Loads information from an existing config.json file.
     def loadConfig(self):
@@ -22,26 +23,35 @@ class config:
         self.trusted = tempConfig["trusted"]
         self.apikey = tempConfig["apikey"]
         self.networkID = tempConfig["networkID"]
+        self.shard = tempConfig["shard"]
         configFile.close()
         
     # Converts the config data into a single list.
     def getList(self):
-        return {"trusted" : self.trusted, "apikey" : self.apikey, "networkID" : self.networkID}
+        return {"trusted" : self.trusted, "apikey" : self.apikey, "networkID" : self.networkID, "shard" : self.shard}
         
-        
+
+# Sockets used because importing requests didnt work in tests
 class mySocket:
-    def __init__(self):
+    # Initialize socket object
+    def __init__(self, host):
+        # It uses SSL
         self.port = 443
+        self.host = host
         self.theSocket = ssl.wrap_socket(socket.socket(socket.AF_INET, socket.SOCK_STREAM))
     
-    def query(self, host, request):
+    # Sends a message out of the socket, and returns the response.
+    def query(self, request):
+        # Creates the connection to the host
         try:
-            self.theSocket.connect((host, self.port))
+            self.theSocket.connect((self.host, self.port))
         except socket.error as socketerror:
             print("Socket Connect Error: ", socketerror)
+        # Sends the request
         try:
             output = ""
             self.theSocket.send(request.encode())
+            # Continues receiving 4096 response bits(?) at a time until the response has been completely read
             while 1==1:
                 response = self.theSocket.recv(4096)
                 #print(response)
@@ -53,35 +63,50 @@ class mySocket:
                 print("Socket Error: ", socketerror)
         return output
         
-def makerequest(target, host, api_key, params):
+# Takes a few options, builds an GET request for the API call
+def makerequest(config, target, params):
     request = "GET "
     request += target
     request += " HTTP/1.1"
     request += "\r\n"
     request += "Host: "
-    request += host
+    request += config.shard
     request += "\r\n"
     request += "x-cisco-meraki-api-key: "
-    request += api_key
+    request += config.apikey
     request += "\r\n"
     request += "Accept: application/json"
     request += "\r\n\r\n"
     request += params
     return request
+    
+
+# Gets Wifi clients, returns an array of the clients.
+def getWifiClients(config, socket):
+    WifiTarget = '/api/v0/networks/' + config.networkID + '/clients'
+    WifiRequest = makerequest( config, WifiTarget, "timespan=1800")
+    WifiClientsGet = socket.query( WifiRequest )
+    WifiClients =  ("[{" + (WifiClientsGet.split("}]")[0] + "}]").split("[{")[1]).replace("\\", "")
+    WifiClientsArray = json.loads(WifiClients)
+    return WifiClientsArray
+    
+# Gets Bluetooth clients, returns an array of the clients.
+def getBTClients(config, socket):
+    BTtarget = '/api/v0/networks/' + config.networkID + '/bluetoothClients'
+    BTrequest = makerequest( config, BTtarget, "timespan=60")
+    BTClientsGet = socket.query( BTrequest)
+    BTClients =  ("[{" + (BTClientsGet.split("}]")[0] + "}]").split("[{")[1]).replace("\\", "")
+    BTClientsArray = json.loads(BTClients)
+    return BTClientsArray
+    
 
 def main():
     appConfig = config()
-    senderSocket = mySocket()
-    
-    host = "n151.meraki.com"
-    wifitar = '/api/v0/networks/' + appConfig.networkID + '/clients';
-    wifireq = makerequest( wifitar, host, appConfig.apikey, "timespan=1800")
-#    print(wifireq)
-    wificlientsget = senderSocket.query( host, wifireq)
-    wificlients =  ("[{" + (wificlientsget.split("}]")[0] + "}]").split("[{")[1]).replace("\\", "")
-#    print(wificlients)
-#    print(soup)
-#    print(wificlients)
+    appConfig.loadConfig()
+    WifiSocket = mySocket(appConfig.shard)
+    BTSocket = mySocket(appConfig.shard)
+    wifiClients = getWifiClients(appConfig, WifiSocket)
+    bluetoothClients = getBTClients(appConfig, BTSocket)
     
     
     # The main loop. Checks if the camera detects a person, if so, check if any trusted devices are on the network. If not, alert.
@@ -96,7 +121,7 @@ def main():
 #        params={'timespan' : '60'}
 #    )
     
-    wifiClients = json.loads(wificlients)
+    
 #    bluetoothClients = json.loads(bluetoothclientsget.text)
     
 #                    print(wificlientsget.url)
