@@ -2,8 +2,6 @@
 A filtering system for Meraki MV camera motion alerts that uses the idea that you don't need alerts for motion if a trusted individual is in the same location where the motion was detected. By remembering a few network / bluetooth devices that you usually take with you when you leave the house, the program can check if you are likely home or not when motion is detected, and email you accordingly.  
 
 
-Better documentation to come. Some tweaks coming. 
-
 ### Setup
 1. Enable Meraki API access, store your api key somewhere safe.  https://documentation.meraki.com/zGeneral_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API
 2. Configure information in config.json. There is an example config as well.
