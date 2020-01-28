@@ -3,8 +3,8 @@
 // GitHub: https://github.com/andrewbluepiano/SmarterMVMotionWebhookAlerts
 
 // Set $myEmail to the email you would like alerts delivered to, and $sharedSecret to the shared secret you enter in dashboard
-$myEmail = "ara1494@rit.edu";
-$sharedSecret = "ABCD";
+$myEmail = "YOUR EMAIL";
+$sharedSecret = "ABCDE";
 
 // Receives and decodes the message from dashboard
 $body = file_get_contents("php://input");
