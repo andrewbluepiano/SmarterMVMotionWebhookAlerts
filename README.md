@@ -16,7 +16,7 @@ The program can use both WiFi and Bluetooth (for AP's with BT) clients as truste
 7. Set up things in dashboard. (Network-Wide -> Alerts -> Webhooks)
 
 ### Planned improvements
-The main thing I will be trying to implement is including a snapshot of the motion in the alert email. I have figured out a method that will work across all MV versions, but its going to be annoying to implement. Going to see if I can get an official way first.  
+The main thing I will be trying to implement is including a snapshot of the motion in the alert email. The link included in the Meraki alerts has proven to be inconsistent. I have figured out a method that will work across all MV versions, but its going to be annoying to implement. Going to see if I can get an official way first.  
 
 ### Sample Alert
 <img src="https://i.imgur.com/PJEXawP.png"  />
