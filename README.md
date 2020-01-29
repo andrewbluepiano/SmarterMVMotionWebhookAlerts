@@ -17,3 +17,6 @@ The program can use both WiFi and Bluetooth (for AP's with BT) clients as truste
 
 ### Planned improvements
 The main thing I will be trying to implement is including a snapshot of the motion in the alert email. I have figured out a method that will work across all MV versions, but its going to be annoying to implement. Going to see if I can get an official way first.  
+
+### Sample Alert
+<img src="https://i.imgur.com/PJEXawP.png"  />
