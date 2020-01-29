@@ -7,13 +7,7 @@ The program can use both WiFi and Bluetooth (for AP's with BT) clients as truste
 
 
 ### Setup
-1. Enable Meraki API access, store your api key somewhere safe.  https://documentation.meraki.com/zGeneral_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API
-2. Configure information in config.json. There is an example config as well.
-3. Configure the email you want to recieve alerts in webhook.php, as well as your desired secret. 
-4. Publish webhook.php receiver to your website
-5. Put config.json and checkTrusted.py somewhere on your server that PHP can access, but browsers cannot. 
-6. Update path to checkTrusted.py in the webhook file
-7. Set up things in dashboard. (Network-Wide -> Alerts -> Webhooks)
+https://github.com/andrewbluepiano/SmarterMVMotionWebhookAlerts/wiki/Main
 
 ### Planned improvements
 The main thing I will be trying to implement is including a snapshot of the motion in the alert email. The link included in the Meraki alerts has proven to be inconsistent. I have figured out a method that will work across all MV versions, but its going to be annoying to implement. Going to see if I can get an official way first.  
