@@ -6,8 +6,8 @@ This program operates on that concept of detecting if you are "home" or not to d
 The program can use both WiFi and Bluetooth (for AP's with BT) clients as trusted devices, and when it receives a motion alert, it uses checkTrusted.py to determine if you are home or not, and if not, it sends an alert email.
 
 
-### Setup
-https://github.com/andrewbluepiano/SmarterMVMotionWebhookAlerts/wiki/Main
+#### Setup
+https://github.com/andrewbluepiano/SmarterMVMotionWebhookAlerts/wiki/Setup
 
 ### Planned improvements
 The main thing I will be trying to implement is including a snapshot of the motion in the alert email. The link included in the Meraki alerts has proven to be inconsistent. I have figured out a method that will work across all MV versions, but its going to be annoying to implement. Going to see if I can get an official way first.  
