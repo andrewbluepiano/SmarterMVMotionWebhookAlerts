@@ -14,8 +14,5 @@ This program operates on that concept of detecting if you are "home" or not to d
 ### Setup
 https://github.com/andrewbluepiano/SmarterMVMotionWebhookAlerts/wiki/Setup
 
-### Planned improvements
-See issues
-
 ### Sample Alert
 <img src="https://i.imgur.com/bAsBMHe.png" width="700" height="855" />
