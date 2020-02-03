@@ -11,6 +11,7 @@ Having a Meraki stack running my home network, I can get details about clients o
 
 This program operates on that concept of detecting if you are "home" or not to determine if you need to be notified of camera motion. By setting your phone, and any other devices that leave the house daily when you do to be "trusted devices", we can use the Meraki Dashboard API to check if those devices are online, before sending a motion alert.
 
+
 ### Setup
 https://github.com/andrewbluepiano/SmarterMVMotionWebhookAlerts/wiki/Setup
 
