@@ -1,0 +1,5 @@
+# Block access to json or py files. 
+<FilesMatch "\.(?:inc|json|py)$">
+Order allow,deny
+Deny from all
+</FilesMatch>
