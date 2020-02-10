@@ -2,9 +2,9 @@
 // Author: Andrew Afonso
 // GitHub: https://github.com/andrewbluepiano/SmarterMVMotionWebhookAlerts
 
-// Set $myEmail to the email you would like alerts delivered to, and $sharedSecret to the shared secret you enter in dashboard
-$myEmail = "YOUR EMAIL HERE";
-$sharedSecret = "SOMEsecret";
+// Set $myEmail to the email you would like alerts delivered to, and $sharedSecret to a random password to use for verifying data is coming from the Meraki Dashboard
+$myEmail = "yourname@website.com";
+$sharedSecret = "somePassword";
 
 // Receives and decodes the message from dashboard
 $body = file_get_contents("php://input");
@@ -62,7 +62,8 @@ if($output == 1){
         // Send the email.
         mail($myEmail,$email_subject,$email_body,$headers);
     }
-    
-    error_log(serialize($webhook), 0);
+	
+	// For debugging
+    // error_log(serialize($webhook), 0);
 }
 ?>
