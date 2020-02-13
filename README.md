@@ -1,4 +1,4 @@
-# SmarterMVMotionAlerts (Webhook version)
+# SmarterMVMotionAlerts (Webhook version) [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/andrewbluepiano/SmarterMVMotionWebhookAlerts)
 ### Overview
 The program can use both WiFi and Bluetooth (for MR's with BT) clients as trusted devices, and when the webhook receiver webhook.php receives a motion alert, it uses checkTrusted.py to determine if you are home or not, and if not, it sends an alert email.
 
