@@ -2,7 +2,10 @@
 ### Overview
 The program can use both WiFi and Bluetooth (for MR's with BT) clients as trusted devices, and when the webhook receiver webhook.php receives a motion alert, it uses checkTrusted.py to determine if you are home or not, and if not, it sends an alert email.
 
-#### Background
+#### Info:
+Over the next two or three weeks, I will be testing this application to get a statistic on what the reduction in unneeded alerts is.
+
+#### Background Concept
 I use my Meraki MV cameras to monitor the entrance of my apartment. The Meraki Dashboard offers the ability to schedule times during which detected motion will generate alerts, but with 3 roommates and being in college, there’s no real schedule that would provide more meaningful filter motion alerts. 
 
 One day while thinking about my cameras & their alerts, networking, and IoT, I had a thought. If your smart home can perform actions when it detects you are arriving at or leaving the house, similarly I should be able to only get motion alerts when neither my roommates or myself are home, which is the only time I really care about motion detected.
