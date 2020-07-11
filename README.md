@@ -3,6 +3,7 @@
 A log filtering / smart alert program that can use both WiFi and Bluetooth (for MR's with BT) clients as trusted devices, and when the webhook receiver webhook.php receives a motion alert, it uses checkTrusted.py to determine if you are home or not, and if not, it sends an alert email.
 
 #### Info / ToDo:
+- This implementation of the concept is built for a home / small office implementation. I highly doubt it would be able to process alerts from more then a few MV's. Making a more complex version of the idea is down the line. 
 - I will be testing this application to get a statistic on what the reduction in unneeded alerts is.
 - Needs to be changed so that python program has a timeout before it checks again (maybe a half a minute / minute)
 
